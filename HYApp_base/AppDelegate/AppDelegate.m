@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "HYHomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,18 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    // 初始化网络
+    // 初始化数据库
+    
+    HYHomeViewController *homeVC = [[HYHomeViewController alloc] init];
+    self.window.rootViewController = homeVC;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
