@@ -24,9 +24,9 @@
     
     // 初始化网络
     // 初始化数据库
-    
     HYHomeViewController *homeVC = [[HYHomeViewController alloc] init];
-    self.window.rootViewController = homeVC;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVC];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
     return YES;

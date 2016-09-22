@@ -23,6 +23,9 @@
 		965FEBFD1D66E8390025AE73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FEBFC1D66E8390025AE73 /* main.m */; };
 		965FEC081D66E8390025AE73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965FEC071D66E8390025AE73 /* Assets.xcassets */; };
 		965FEC0B1D66E8390025AE73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965FEC091D66E8390025AE73 /* LaunchScreen.storyboard */; };
+		967F4F751D94150E007042D4 /* HYAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F741D94150E007042D4 /* HYAdHelper.m */; };
+		967F4F781D94153A007042D4 /* HYAdvertisingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F771D94153A007042D4 /* HYAdvertisingPageViewController.m */; };
+		967F4F7B1D941614007042D4 /* HYAdvertisingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F7A1D941614007042D4 /* HYAdvertisingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +64,12 @@
 		965FEC071D66E8390025AE73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		965FEC0A1D66E8390025AE73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		965FEC0C1D66E8390025AE73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		967F4F731D94150E007042D4 /* HYAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYAdHelper.h; path = Utils/AdHelper/HYAdHelper.h; sourceTree = "<group>"; };
+		967F4F741D94150E007042D4 /* HYAdHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYAdHelper.m; path = Utils/AdHelper/HYAdHelper.m; sourceTree = "<group>"; };
+		967F4F761D94153A007042D4 /* HYAdvertisingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYAdvertisingPageViewController.h; path = Controllers/Home/AdvertisingPage/HYAdvertisingPageViewController.h; sourceTree = "<group>"; };
+		967F4F771D94153A007042D4 /* HYAdvertisingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYAdvertisingPageViewController.m; path = Controllers/Home/AdvertisingPage/HYAdvertisingPageViewController.m; sourceTree = "<group>"; };
+		967F4F791D941614007042D4 /* HYAdvertisingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYAdvertisingView.h; path = Views/Home/AdvertisingPage/HYAdvertisingView.h; sourceTree = "<group>"; };
+		967F4F7A1D941614007042D4 /* HYAdvertisingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYAdvertisingView.m; path = Views/Home/AdvertisingPage/HYAdvertisingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +102,7 @@
 		9654BDE91D8E80C600B4DA2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				967F4F701D9414A0007042D4 /* Home */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -108,6 +118,7 @@
 		9654BDEB1D8E80EA00B4DA2A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				967F4F721D9414C5007042D4 /* AdHelper */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -115,6 +126,7 @@
 		9654BDEC1D8E811700B4DA2A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				967F4F6F1D9413D6007042D4 /* AdvertisingPage */,
 				9654BDED1D8E818D00B4DA2A /* HYHomeViewController.h */,
 				9654BDEE1D8E818D00B4DA2A /* HYHomeViewController.m */,
 			);
@@ -203,6 +215,41 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		967F4F6F1D9413D6007042D4 /* AdvertisingPage */ = {
+			isa = PBXGroup;
+			children = (
+				967F4F761D94153A007042D4 /* HYAdvertisingPageViewController.h */,
+				967F4F771D94153A007042D4 /* HYAdvertisingPageViewController.m */,
+			);
+			name = AdvertisingPage;
+			sourceTree = "<group>";
+		};
+		967F4F701D9414A0007042D4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				967F4F711D9414A8007042D4 /* AdvertisingPage */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		967F4F711D9414A8007042D4 /* AdvertisingPage */ = {
+			isa = PBXGroup;
+			children = (
+				967F4F791D941614007042D4 /* HYAdvertisingView.h */,
+				967F4F7A1D941614007042D4 /* HYAdvertisingView.m */,
+			);
+			name = AdvertisingPage;
+			sourceTree = "<group>";
+		};
+		967F4F721D9414C5007042D4 /* AdHelper */ = {
+			isa = PBXGroup;
+			children = (
+				967F4F731D94150E007042D4 /* HYAdHelper.h */,
+				967F4F741D94150E007042D4 /* HYAdHelper.m */,
+			);
+			name = AdHelper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -274,13 +321,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9654BE151D8E828400B4DA2A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				967F4F751D94150E007042D4 /* HYAdHelper.m in Sources */,
 				9654BE131D8E828400B4DA2A /* MASViewConstraint.m in Sources */,
 				9654BE0E1D8E828400B4DA2A /* MASCompositeConstraint.m in Sources */,
+				967F4F781D94153A007042D4 /* HYAdvertisingPageViewController.m in Sources */,
 				9654BE141D8E828400B4DA2A /* NSArray+MASAdditions.m in Sources */,
 				965FEBFD1D66E8390025AE73 /* main.m in Sources */,
 				9654BDEF1D8E818D00B4DA2A /* HYHomeViewController.m in Sources */,
 				9654BE111D8E828400B4DA2A /* MASLayoutConstraint.m in Sources */,
 				964428271D6D42190048957B /* AppDelegate.m in Sources */,
+				967F4F7B1D941614007042D4 /* HYAdvertisingView.m in Sources */,
 				9654BE171D8E828400B4DA2A /* ViewController+MASAdditions.m in Sources */,
 				9654BE161D8E828400B4DA2A /* View+MASAdditions.m in Sources */,
 				9654BE121D8E828400B4DA2A /* MASViewAttribute.m in Sources */,
