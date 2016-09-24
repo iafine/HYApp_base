@@ -1,0 +1,30 @@
+//
+//  HYApp-Prefix.pch
+//  HYApp_base
+//
+//  Created by work on 16/9/24.
+//  Copyright © 2016年 Hyyy. All rights reserved.
+//
+
+#ifndef HYApp_Prefix_pch
+#define HYApp_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+#import "Masonry.h"
+#endif
+
+// Notification名称
+#define DISPATCH_AD_PAGE @"dispatch_ad_page"    // 广告跳转通知
+
+// 屏幕相关
+#define kSCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
+#define kSCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+// 弱引用/强引用
+#define kWeakSelf(type)  __weak typeof(type) weak##type = type;
+#define kStrongSelf(type)  __strong typeof(type) type = weak##type;
+
+#endif /* HYApp_Prefix_pch */

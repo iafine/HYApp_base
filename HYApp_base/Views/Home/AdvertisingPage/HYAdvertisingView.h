@@ -10,4 +10,12 @@
 
 @interface HYAdvertisingView : UIView
 
+
+/**
+ 展示广告页
+ */
+- (void)show;
+
+@property (copy, nonatomic) NSString *imageFieldPath;
+
 @end

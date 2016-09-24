@@ -23,9 +23,9 @@
 		965FEBFD1D66E8390025AE73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FEBFC1D66E8390025AE73 /* main.m */; };
 		965FEC081D66E8390025AE73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965FEC071D66E8390025AE73 /* Assets.xcassets */; };
 		965FEC0B1D66E8390025AE73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965FEC091D66E8390025AE73 /* LaunchScreen.storyboard */; };
-		967F4F751D94150E007042D4 /* HYAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F741D94150E007042D4 /* HYAdHelper.m */; };
 		967F4F781D94153A007042D4 /* HYAdvertisingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F771D94153A007042D4 /* HYAdvertisingPageViewController.m */; };
 		967F4F7B1D941614007042D4 /* HYAdvertisingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F7A1D941614007042D4 /* HYAdvertisingView.m */; };
+		96CE0D581D9658BA000D4F54 /* HYAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CE0D571D9658BA000D4F54 /* HYAdHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,12 +64,13 @@
 		965FEC071D66E8390025AE73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		965FEC0A1D66E8390025AE73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		965FEC0C1D66E8390025AE73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		967F4F731D94150E007042D4 /* HYAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYAdHelper.h; path = Utils/AdHelper/HYAdHelper.h; sourceTree = "<group>"; };
-		967F4F741D94150E007042D4 /* HYAdHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYAdHelper.m; path = Utils/AdHelper/HYAdHelper.m; sourceTree = "<group>"; };
 		967F4F761D94153A007042D4 /* HYAdvertisingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYAdvertisingPageViewController.h; path = Controllers/Home/AdvertisingPage/HYAdvertisingPageViewController.h; sourceTree = "<group>"; };
 		967F4F771D94153A007042D4 /* HYAdvertisingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYAdvertisingPageViewController.m; path = Controllers/Home/AdvertisingPage/HYAdvertisingPageViewController.m; sourceTree = "<group>"; };
 		967F4F791D941614007042D4 /* HYAdvertisingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYAdvertisingView.h; path = Views/Home/AdvertisingPage/HYAdvertisingView.h; sourceTree = "<group>"; };
 		967F4F7A1D941614007042D4 /* HYAdvertisingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYAdvertisingView.m; path = Views/Home/AdvertisingPage/HYAdvertisingView.m; sourceTree = "<group>"; };
+		96CE0D561D9658BA000D4F54 /* HYAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYAdHelper.h; sourceTree = "<group>"; };
+		96CE0D571D9658BA000D4F54 /* HYAdHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYAdHelper.m; sourceTree = "<group>"; };
+		96CE0D591D965C11000D4F54 /* HYApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HYApp-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +119,7 @@
 		9654BDEB1D8E80EA00B4DA2A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				967F4F721D9414C5007042D4 /* AdHelper */,
+				96CE0D541D9658BA000D4F54 /* Helper */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -211,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				965FEBFC1D66E8390025AE73 /* main.m */,
+				96CE0D591D965C11000D4F54 /* HYApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -241,13 +243,22 @@
 			name = AdvertisingPage;
 			sourceTree = "<group>";
 		};
-		967F4F721D9414C5007042D4 /* AdHelper */ = {
+		96CE0D541D9658BA000D4F54 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				967F4F731D94150E007042D4 /* HYAdHelper.h */,
-				967F4F741D94150E007042D4 /* HYAdHelper.m */,
+				96CE0D551D9658BA000D4F54 /* AdHelper */,
 			);
-			name = AdHelper;
+			name = Helper;
+			path = Utils/Helper;
+			sourceTree = "<group>";
+		};
+		96CE0D551D9658BA000D4F54 /* AdHelper */ = {
+			isa = PBXGroup;
+			children = (
+				96CE0D561D9658BA000D4F54 /* HYAdHelper.h */,
+				96CE0D571D9658BA000D4F54 /* HYAdHelper.m */,
+			);
+			path = AdHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,7 +332,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9654BE151D8E828400B4DA2A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				967F4F751D94150E007042D4 /* HYAdHelper.m in Sources */,
 				9654BE131D8E828400B4DA2A /* MASViewConstraint.m in Sources */,
 				9654BE0E1D8E828400B4DA2A /* MASCompositeConstraint.m in Sources */,
 				967F4F781D94153A007042D4 /* HYAdvertisingPageViewController.m in Sources */,
@@ -334,6 +344,7 @@
 				9654BE171D8E828400B4DA2A /* ViewController+MASAdditions.m in Sources */,
 				9654BE161D8E828400B4DA2A /* View+MASAdditions.m in Sources */,
 				9654BE121D8E828400B4DA2A /* MASViewAttribute.m in Sources */,
+				96CE0D581D9658BA000D4F54 /* HYAdHelper.m in Sources */,
 				9654BE0F1D8E828400B4DA2A /* MASConstraint.m in Sources */,
 				9654BE101D8E828400B4DA2A /* MASConstraintMaker.m in Sources */,
 			);
@@ -442,6 +453,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = "HYApp_base/HYApp-Prefix.pch";
 				INFOPLIST_FILE = HYApp_base/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hyyy.HYApp-base";
@@ -454,6 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = "HYApp_base/HYApp-Prefix.pch";
 				INFOPLIST_FILE = HYApp_base/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hyyy.HYApp-base";

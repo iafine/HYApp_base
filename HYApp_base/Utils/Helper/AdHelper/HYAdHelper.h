@@ -10,4 +10,10 @@
 
 @interface HYAdHelper : NSObject
 
+
+/**
+ 是否需要显示广告
+ */
++ (BOOL)isNeedShow;
+
 @end
