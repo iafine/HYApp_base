@@ -10,10 +10,21 @@
 
 @interface HYAdHelper : NSObject
 
-
 /**
  是否需要显示广告
  */
 + (BOOL)isNeedShow;
+
+
+/**
+ 广告图片目录地址
+ */
++ (NSString *)adImagePath;
+
+
+/**
+ 更新广告图片
+ */
++ (void)refreshAdvertisingImage;
 
 @end

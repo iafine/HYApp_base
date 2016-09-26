@@ -8,8 +8,12 @@
 
 #import "AppDelegate.h"
 #import "HYHomeViewController.h"
+#import "HYAdHelper.h"
+#import "HYAdvertisingView.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) HYAdvertisingView *advertisingView;
 
 @end
 
@@ -27,6 +31,15 @@
     HYHomeViewController *homeVC = [[HYHomeViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVC];
     self.window.rootViewController = nav;
+    
+    // 加载广告
+    if ([HYAdHelper isNeedShow]) {
+        self.advertisingView.imageFieldPath = [HYAdHelper adImagePath];
+        [self.advertisingView show];
+    }
+    // 更新广告
+    [HYAdHelper refreshAdvertisingImage];
+    
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -52,6 +65,14 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - setter and getter
+- (HYAdvertisingView *)advertisingView {
+    if (!_advertisingView) {
+        _advertisingView = [[HYAdvertisingView alloc] initWithFrame:self.window.bounds];
+    }
+    return _advertisingView;
 }
 
 @end

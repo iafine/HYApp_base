@@ -8,7 +8,7 @@
 
 #import "HYAdvertisingView.h"
 
-static NSInteger const adTime = 3;  // 广告显示时间
+static NSInteger const adTime = 5;  // 广告显示时间
 
 @interface HYAdvertisingView()
 
@@ -137,5 +137,11 @@ static NSInteger const adTime = 3;  // 广告显示时间
     }
     return _count;
 }
+
+- (void)setImageFieldPath:(NSString *)imageFieldPath {
+    _imageFieldPath = imageFieldPath;
+    self.adImageView.image = [UIImage imageWithContentsOfFile:imageFieldPath];
+}
+
 @end
 
