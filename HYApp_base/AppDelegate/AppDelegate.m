@@ -32,6 +32,8 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVC];
     self.window.rootViewController = nav;
     
+    [self.window makeKeyAndVisible];
+    
     // 加载广告
     if ([HYAdHelper isNeedShow]) {
         self.advertisingView.imageFieldPath = [HYAdHelper adImagePath];
@@ -39,8 +41,6 @@
     }
     // 更新广告
     [HYAdHelper refreshAdvertisingImage];
-    
-    [self.window makeKeyAndVisible];
     
     return YES;
 }

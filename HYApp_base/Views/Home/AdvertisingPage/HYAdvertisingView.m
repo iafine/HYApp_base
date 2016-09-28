@@ -72,6 +72,7 @@ static NSInteger const adTime = 5;  // 广告显示时间
 }
 
 - (void)clickedSkipBtnHandler {
+    [self dismiss];
 }
 
 - (void)countDown {
@@ -100,7 +101,7 @@ static NSInteger const adTime = 5;  // 广告显示时间
 
 #pragma mark - setter and getter
 - (UIImageView *)adImageView {
-    if (_adImageView) {
+    if (!_adImageView) {
         _adImageView = [UIImageView new];
         _adImageView.userInteractionEnabled = YES;
         _adImageView.contentMode = UIViewContentModeScaleAspectFill;
