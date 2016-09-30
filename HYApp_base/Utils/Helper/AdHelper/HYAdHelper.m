@@ -30,7 +30,7 @@ static NSString *const ad_image_name = @"AD_IMAGE_NAME";
 
 + (void)refreshAdvertisingImage {
     // 请求广告内容(先用一些图片代替)
-    NSString *imageUrl = @"http://pic.paopaoche.net/up/2012-2/20122220201612322865.png";
+    NSString *imageUrl = @"http://media.idownloadblog.com/wp-content/uploads/2013/09/116@2xiphone.png";
     // 获取图片名
     NSString *imageName = [[imageUrl componentsSeparatedByString:@"/"] lastObject];
     // 先判断本地是否有这张图片

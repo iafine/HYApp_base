@@ -8,6 +8,7 @@
 
 #import "HYHomeViewController.h"
 #import "HYAdvertisingPageViewController.h"
+#import "HYFileHelper.h"
 
 @interface HYHomeViewController ()
 
@@ -20,8 +21,8 @@
     
     self.title = @"首页";
     
-    // 监听广告跳转通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushAdViewController) name:DISPATCH_AD_PAGE object:nil];
+    // 监听广告相关
+    [self listenAdNotification];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,7 +34,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DISPATCH_AD_PAGE object:nil];
 }
 
-#pragma mark - events
+#pragma mark - 监听广告相关
+- (void)listenAdNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushAdViewController) name:DISPATCH_AD_PAGE object:nil];
+}
 
 /**
  跳转到广告页面
