@@ -21,6 +21,7 @@
     
     self.title = @"首页";
     
+    [self testFileHelper];
     // 监听广告相关
     [self listenAdNotification];
 }
@@ -32,6 +33,12 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DISPATCH_AD_PAGE object:nil];
+}
+
+- (void)testFileHelper {
+    // 遍历Library目录
+    NSArray *libraryArr = [HYFileHelper listFilesInLibraryDirectoryByDeep:NO];
+    NSLog(@"Library目录: %@", libraryArr);
 }
 
 #pragma mark - 监听广告相关
