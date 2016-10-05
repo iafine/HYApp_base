@@ -1,20 +1,20 @@
 //
-//  HYFileHelper.m
-//  HYApp_base
+//  HYFileManager.m
+//  HYFileManager
 //
-//  Created by work on 16/9/30.
-//  Copyright © 2016年 Hyyy. All rights reserved.
+//  Created by work on 15/9/30.
+//  Copyright © 2015年 Hyyy. All rights reserved.
 //
 
-#import "HYFileHelper.h"
+#import "HYFileManager.h"
 
-@interface HYFileHelper()
+@interface HYFileManager()
 
 @property (strong, nonatomic) NSFileManager *manager;
 
 @end
 
-@implementation HYFileHelper
+@implementation HYFileManager
 
 #pragma mark - 沙盒目录相关
 + (NSString *)homeDir {

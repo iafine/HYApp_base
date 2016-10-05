@@ -1,14 +1,14 @@
 //
-//  HYFileHelper.h
-//  HYApp_base(沙盒目录中文件操作)
+//  HYFileManager.h
+//  HYFileManager
 //
-//  Created by work on 16/9/30.
-//  Copyright © 2016年 Hyyy. All rights reserved.
+//  Created by work on 15/9/30.
+//  Copyright © 2015年 Hyyy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface HYFileHelper : NSObject
+@interface HYFileManager : NSObject
 
 #pragma mark - 沙盒目录相关
 // 沙盒的主目录路径

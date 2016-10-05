@@ -8,7 +8,7 @@
 
 #import "HYHomeViewController.h"
 #import "HYAdvertisingPageViewController.h"
-#import "HYFileHelper.h"
+#import "HYFileManager.h"
 
 @interface HYHomeViewController ()
 
@@ -36,9 +36,9 @@
 }
 
 - (void)testFileHelper {
-//    // 遍历Library目录
-//    NSArray *libraryArr = [HYFileHelper listFilesInLibraryDirectoryByDeep:NO];
-//    NSLog(@"Library目录: %@", libraryArr);
+    // 遍历Library目录
+    NSArray *libraryArr = [HYFileManager listFilesInLibraryDirectoryByDeep:NO];
+    NSLog(@"Library目录: %@", libraryArr);
 //    // 创建文件夹
 //    NSString *directoryPath = [NSString stringWithFormat:@"%@/test", [HYFileHelper libraryDir]];
 //    BOOL isSuccess = [HYFileHelper createDirectoryAtPath:directoryPath];
@@ -54,12 +54,12 @@
 //    NSString *toPath = [NSString stringWithFormat:@"%@/hyyy", [HYFileHelper libraryDir]];
 //    BOOL isSuccess = [HYFileHelper copyItemAtPath:path toPath:toPath overwrite:YES error:&error];
 //    NSLog(@"复制文件：%d", isSuccess);
-    // 移动文件
-    NSError *error;
-    NSString *path = [NSString stringWithFormat:@"%@/hyyy", [HYFileHelper libraryDir]];
-    NSString *toPath = [NSString stringWithFormat:@"%@/test/hyyy", [HYFileHelper libraryDir]];
-    BOOL isSuccess = [HYFileHelper moveItemAtPath:path toPath:toPath overwrite:YES error:&error];
-    NSLog(@"移动文件：%d", isSuccess);
+//    // 移动文件
+//    NSError *error;
+//    NSString *path = [NSString stringWithFormat:@"%@/hyyy", [HYFileManager libraryDir]];
+//    NSString *toPath = [NSString stringWithFormat:@"%@/test/hyyy", [HYFileManager libraryDir]];
+//    BOOL isSuccess = [HYFileManager moveItemAtPath:path toPath:toPath overwrite:YES error:&error];
+//    NSLog(@"移动文件：%d", isSuccess);
 }
 
 #pragma mark - 监听广告相关
