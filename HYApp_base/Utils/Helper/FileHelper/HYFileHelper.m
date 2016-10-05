@@ -314,6 +314,120 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:path];
 }
 
++ (BOOL)isEmptyItemAtPath:(NSString *)path {
+    return [self isEmptyItemAtPath:path error:nil];
+}
+
++ (BOOL)isEmptyItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return ([self isFileAtPath:path error:error] &&
+            [[self sizeOfItemAtPath:path error:error] intValue] == 0) ||
+    ([self isDirectoryAtPath:path error:error] &&
+     [[self listFilesInDirectoryAtPath:path deep:NO] count] == 0);
+}
+
++ (BOOL)isDirectoryAtPath:(NSString *)path {
+    return [self isDirectoryAtPath:path error:nil];
+}
+
++ (BOOL)isDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return ([self attributeOfItemAtPath:path forKey:NSFileType error:error] == NSFileTypeDirectory);
+}
+
++ (BOOL)isFileAtPath:(NSString *)path {
+    return [self isFileAtPath:path error:nil];
+}
+
++ (BOOL)isFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return ([self attributeOfItemAtPath:path forKey:NSFileType error:error] == NSFileTypeRegular);
+}
+
++ (BOOL)isExecutableItemAtPath:(NSString *)path {
+    return [[NSFileManager defaultManager] isExecutableFileAtPath:path];
+}
+
++ (BOOL)isReadableItemAtPath:(NSString *)path {
+    return [[NSFileManager defaultManager] isReadableFileAtPath:path];
+}
++ (BOOL)isWritableItemAtPath:(NSString *)path {
+    return [[NSFileManager defaultManager] isWritableFileAtPath:path];
+}
+
+#pragma mark - 获取文件(夹)大小
++ (NSNumber *)sizeOfItemAtPath:(NSString *)path {
+    return [self sizeOfItemAtPath:path error:nil];
+}
+
++ (NSNumber *)sizeOfItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return (NSNumber *)[self attributeOfItemAtPath:path forKey:NSFileSize error:error];
+}
+
++ (NSNumber *)sizeOfFileAtPath:(NSString *)path {
+    return [self sizeOfFileAtPath:path error:nil];
+}
+
++ (NSNumber *)sizeOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    if ([self isFileAtPath:path error:error]) {
+        return [self sizeOfItemAtPath:path error:error];
+    }
+    return nil;
+}
+
++ (NSNumber *)sizeOfDirectoryAtPath:(NSString *)path {
+    return [self sizeOfDirectoryAtPath:path error:nil];
+}
+
++ (NSNumber *)sizeOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    if ([self isDirectoryAtPath:path error:error]) {
+        NSNumber *size = [self sizeOfItemAtPath:path error:error];
+        double sizeValue = [size doubleValue];
+        
+        NSArray *subPaths = [self listFilesInDirectoryAtPath:path deep:YES];
+        for (NSUInteger i = 0; i < subPaths.count; i++) {
+            NSString *subPath = [subPaths objectAtIndex:i];
+            NSNumber *subPathSize = [self sizeOfItemAtPath:subPath error:error];
+            sizeValue += [subPathSize doubleValue];
+        }
+        return [NSNumber numberWithDouble:sizeValue];
+    }
+    return nil;
+}
+
++ (NSString *)sizeFormattedOfItemAtPath:(NSString *)path {
+    return [self sizeFormattedOfItemAtPath:path error:nil];
+}
+
++ (NSString *)sizeFormattedOfItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    NSNumber *size = [self sizeOfItemAtPath:path error:error];
+    if (!size) {
+        return [self sizeFormatted:size];
+    }
+    return nil;
+}
+
++ (NSString *)sizeFormattedOfFileAtPath:(NSString *)path {
+    return [self sizeFormattedOfFileAtPath:path error:nil];
+}
+
++ (NSString *)sizeFormattedOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    NSNumber *size = [self sizeOfFileAtPath:path error:error];
+    if (!size) {
+        return [self sizeFormatted:size];
+    }
+    return nil;
+}
+
++ (NSString *)sizeFormattedOfDirectoryAtPath:(NSString *)path {
+    return [self sizeFormattedOfDirectoryAtPath:path error:nil];
+}
+
++ (NSString *)sizeFormattedOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    NSNumber *size = [self sizeOfDirectoryAtPath:path error:error];
+    if (!size) {
+        return [self sizeFormatted:size];
+    }
+    return nil;
+}
+
 #pragma mark - 写入文件内容
 + (BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content {
     return [self writeFileAtPath:path content:content error:nil];
@@ -359,8 +473,25 @@
 }
 
 #pragma mark - private methods
-+(BOOL)isNotError:(NSError **)error {
++ (BOOL)isNotError:(NSError **)error {
     return ((error == nil) || ((*error) == nil));
+}
+
++(NSString *)sizeFormatted:(NSNumber *)size {
+    double convertedValue = [size doubleValue];
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = @[@"bytes", @"KB", @"MB", @"GB", @"TB"];
+    
+    while(convertedValue > 1024){
+        convertedValue /= 1024;
+        
+        multiplyFactor++;
+    }
+    
+    NSString *sizeFormat = ((multiplyFactor > 1) ? @"%4.2f %@" : @"%4.0f %@");
+    
+    return [NSString stringWithFormat:sizeFormat, convertedValue, tokens[multiplyFactor]];
 }
 
 @end
