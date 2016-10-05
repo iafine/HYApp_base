@@ -36,9 +36,30 @@
 }
 
 - (void)testFileHelper {
-    // 遍历Library目录
-    NSArray *libraryArr = [HYFileHelper listFilesInLibraryDirectoryByDeep:NO];
-    NSLog(@"Library目录: %@", libraryArr);
+//    // 遍历Library目录
+//    NSArray *libraryArr = [HYFileHelper listFilesInLibraryDirectoryByDeep:NO];
+//    NSLog(@"Library目录: %@", libraryArr);
+//    // 创建文件夹
+//    NSString *directoryPath = [NSString stringWithFormat:@"%@/test", [HYFileHelper libraryDir]];
+//    BOOL isSuccess = [HYFileHelper createDirectoryAtPath:directoryPath];
+//    NSLog(@"创建文件夹: %d", isSuccess);
+//    // 创建文件
+//    NSError *error;
+//    NSString *filePath = [NSString stringWithFormat:@"%@/test/hyyy/file.md", [HYFileHelper libraryDir]];
+//    BOOL isSuccess = [HYFileHelper createFileAtPath:filePath overwrite:YES];
+//    NSLog(@"创建文件: %d", isSuccess);
+//    // 复制文件
+//    NSError *error;
+//    NSString *path = [NSString stringWithFormat:@"%@/test/hyyy", [HYFileHelper libraryDir]];
+//    NSString *toPath = [NSString stringWithFormat:@"%@/hyyy", [HYFileHelper libraryDir]];
+//    BOOL isSuccess = [HYFileHelper copyItemAtPath:path toPath:toPath overwrite:YES error:&error];
+//    NSLog(@"复制文件：%d", isSuccess);
+    // 移动文件
+    NSError *error;
+    NSString *path = [NSString stringWithFormat:@"%@/hyyy", [HYFileHelper libraryDir]];
+    NSString *toPath = [NSString stringWithFormat:@"%@/test/hyyy", [HYFileHelper libraryDir]];
+    BOOL isSuccess = [HYFileHelper moveItemAtPath:path toPath:toPath overwrite:YES error:&error];
+    NSLog(@"移动文件：%d", isSuccess);
 }
 
 #pragma mark - 监听广告相关

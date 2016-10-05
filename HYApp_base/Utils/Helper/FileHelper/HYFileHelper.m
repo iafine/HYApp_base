@@ -86,6 +86,23 @@
     return [self listFilesInDirectoryAtPath:[self cachesDir] deep:deep];
 }
 
+#pragma mark - 获取文件属性
++ (id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key {
+    return [[self attributesOfItemAtPath:path] objectForKey:key];
+}
+
++ (id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key error:(NSError *__autoreleasing *)error {
+    return [[self attributesOfItemAtPath:path error:error] objectForKey:key];
+}
+
++ (NSDictionary *)attributesOfItemAtPath:(NSString *)path {
+    return [self attributesOfItemAtPath:path error:nil];
+}
+
++ (NSDictionary *)attributesOfItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return [[NSFileManager defaultManager] attributesOfItemAtPath:path error:error];
+}
+
 #pragma mark - 创建文件(夹)
 + (BOOL)createDirectoryAtPath:(NSString *)path {
     return [self createDirectoryAtPath:path error:nil];
@@ -98,11 +115,11 @@
 }
 
 + (BOOL)createFileAtPath:(NSString *)path {
-    return [self createFileAtPath:path content:nil overwrite:NO error:nil];
+    return [self createFileAtPath:path content:nil overwrite:YES error:nil];
 }
 
 + (BOOL)createFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
-    return [self createFileAtPath:path content:nil overwrite:NO error:error];
+    return [self createFileAtPath:path content:nil overwrite:YES error:error];
 }
 
 + (BOOL)createFileAtPath:(NSString *)path overwrite:(BOOL)overwrite {
@@ -114,11 +131,11 @@
 }
 
 + (BOOL)createFileAtPath:(NSString *)path content:(NSObject *)content {
-    return [self createFileAtPath:path content:content overwrite:NO error:nil];
+    return [self createFileAtPath:path content:content overwrite:YES error:nil];
 }
 
 + (BOOL)createFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError *__autoreleasing *)error {
-    return [self createFileAtPath:path content:content overwrite:NO error:error];
+    return [self createFileAtPath:path content:content overwrite:YES error:error];
 }
 
 + (BOOL)createFileAtPath:(NSString *)path content:(NSObject *)content overwrite:(BOOL)overwrite {
@@ -126,20 +143,153 @@
 }
 
 + (BOOL)createFileAtPath:(NSString *)path content:(NSObject *)content overwrite:(BOOL)overwrite error:(NSError *__autoreleasing *)error {
-    // 如果路径不存在或者路径存在但是需要覆盖文件，那么创建文件。
-    if (![self isExistsAtPath:path] || (overwrite && [self removeItemAtPath:path])) {
-        if ([self createDirectoryAtPath:path error:error]) {
-            BOOL isSuccess = [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
-            if (content) {
-                [self writeFileAtPath:path content:content error:error];
-            }
-            return isSuccess;
-        }else {
+    // 如果文件夹路径不存在，那么先创建文件夹
+    NSString *directoryPath = [self directoryAtPath:path];
+    if (![self isExistsAtPath:directoryPath]) {
+        // 创建文件夹
+        if (![self createDirectoryAtPath:directoryPath error:error]) {
             return NO;
         }
-    }else {
+    }
+    // 如果文件存在，并不想覆盖，那么直接返回YES。
+    if (!overwrite) {
+        if ([self isExistsAtPath:path]) {
+            return YES;
+        }
+    }
+    // 创建文件
+    BOOL isSuccess = [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
+    if (content) {
+        [self writeFileAtPath:path content:content error:error];
+    }
+    return isSuccess;
+}
+
++ (NSDate *)creationDateOfItemAtPath:(NSString *)path {
+    return [self creationDateOfItemAtPath:path error:nil];
+}
+
++ (NSDate *)creationDateOfItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return (NSDate *)[self attributeOfItemAtPath:path forKey:NSFileCreationDate error:error];
+}
+
++ (NSDate *)modificationDateOfItemAtPath:(NSString *)path {
+    return [self modificationDateOfItemAtPath:path error:nil];
+}
+
++ (NSDate *)modificationDateOfItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return (NSDate *)[self attributeOfItemAtPath:path forKey:NSFileModificationDate error:error];
+}
+
+#pragma mark - 删除文件(夹)
++ (BOOL)removeItemAtPath:(NSString *)path {
+    return [self removeItemAtPath:path error:nil];
+}
+
++ (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    return [[NSFileManager defaultManager] removeItemAtPath:path error:error];
+}
+
++ (BOOL)clearCachesDirectory {
+    NSArray *subFiles = [self listFilesInCachesDirectoryByDeep:NO];
+    BOOL isSuccess;
+    
+    for (NSString *file in subFiles) {
+        NSString *absolutePath = [[self cachesDir] stringByAppendingPathComponent:file];
+        isSuccess &= [self removeItemAtPath:absolutePath];
+    }
+    return isSuccess;
+}
+
++ (BOOL)clearTmpDirectory {
+    NSArray *subFiles = [self listFilesInTmpDirectoryByDeep:NO];
+    BOOL isSuccess;
+    
+    for (NSString *file in subFiles) {
+        NSString *absolutePath = [[self tmpDir] stringByAppendingPathComponent:file];
+        isSuccess &= [self removeItemAtPath:absolutePath];
+    }
+    return isSuccess;
+}
+
+#pragma mark - 复制文件(夹)
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath {
+    return [self copyItemAtPath:path toPath:toPath overwrite:NO error:nil];
+}
+
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError *__autoreleasing *)error {
+    return [self copyItemAtPath:path toPath:toPath overwrite:NO error:error];
+}
+
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite {
+    return [self copyItemAtPath:path toPath:toPath overwrite:overwrite error:nil];
+}
+
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError *__autoreleasing *)error {
+    // 先要保证源文件路径存在，不然抛出异常
+    if (![self isExistsAtPath:path]) {
+        [NSException raise:@"非法的源文件路径" format:@"源文件路径%@不存在，请检查源文件路径", path];
         return NO;
     }
+    NSString *toDirPath = [self directoryAtPath:toPath];
+    if (![self isExistsAtPath:toDirPath]) {
+        // 创建复制路径
+        if (![self createDirectoryAtPath:toDirPath error:error]) {
+            return NO;
+        }
+    }
+    // 如果覆盖，那么先删掉原文件
+    if (overwrite) {
+        if ([self isExistsAtPath:toPath]) {
+            [self removeItemAtPath:toPath error:error];
+        }
+    }
+    // 复制文件
+    BOOL isSuccess = [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:error];
+    
+    return isSuccess;
+}
+
+#pragma mark - 移动文件(夹)
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath {
+    return [self moveItemAtPath:path toPath:toPath overwrite:NO error:nil];
+}
+
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError *__autoreleasing *)error {
+    return [self moveItemAtPath:path toPath:toPath overwrite:NO error:error];
+}
+
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite {
+    return [self moveItemAtPath:path toPath:toPath overwrite:overwrite error:nil];
+}
+
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError *__autoreleasing *)error {
+    // 先要保证源文件路径存在，不然抛出异常
+    if (![self isExistsAtPath:path]) {
+        [NSException raise:@"非法的源文件路径" format:@"源文件路径%@不存在，请检查源文件路径", path];
+        return NO;
+    }
+    NSString *toDirPath = [self directoryAtPath:toPath];
+    if (![self isExistsAtPath:toDirPath]) {
+        // 创建移动路径
+        if (![self createDirectoryAtPath:toDirPath error:error]) {
+            return NO;
+        }
+    }
+    // 如果覆盖，那么先删掉原文件
+    if ([self isExistsAtPath:toPath]) {
+        if (overwrite) {
+            [self removeItemAtPath:toPath error:error];
+        }else {
+            [self removeItemAtPath:path error:error];
+            return YES;
+        }
+    }
+
+    // 移动文件
+    BOOL isSuccess = [[NSFileManager defaultManager] moveItemAtPath:path toPath:toPath error:error];
+    
+    return isSuccess;
 }
 
 #pragma mark - 根据URL获取文件名
@@ -164,20 +314,6 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:path];
 }
 
-#pragma mark - 删除文件(夹)
-+ (BOOL)removeItemAtPath:(NSString *)path {
-    return [self removeItemAtPath:path error:nil];
-}
-
-+ (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)error {
-    return [[NSFileManager defaultManager] removeItemAtPath:path error:error];
-}
-
-#pragma mark - private methods
-+(BOOL)isNotError:(NSError **)error {
-    return ((error == nil) || ((*error) == nil));
-}
-
 #pragma mark - 写入文件内容
 + (BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content {
     return [self writeFileAtPath:path content:content error:nil];
@@ -188,8 +324,7 @@
         [NSException raise:@"非法的文件内容" format:@"文件内容不能为nil"];
         return NO;
     }
-    
-    if ([self createFileAtPath:path content:nil overwrite:YES error:error]) {
+    if ([self isExistsAtPath:path]) {
         if ([content isKindOfClass:[NSMutableArray class]]) {
             [(NSMutableArray *)content writeToFile:path atomically:YES];
         }else if ([content isKindOfClass:[NSArray class]]) {
@@ -221,6 +356,11 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - private methods
++(BOOL)isNotError:(NSError **)error {
+    return ((error == nil) || ((*error) == nil));
 }
 
 @end

@@ -45,6 +45,16 @@
 // 遍历tmp目录
 + (NSArray *)listFilesInTmpDirectoryByDeep:(BOOL)deep;
 
+#pragma mark - 获取文件属性
+// 根据key获取文件某个属性
++ (id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key;
+// 根据key获取文件某个属性(错误信息error)
++ (id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key error:(NSError **)error;
+// 获取文件属性集合
++ (NSDictionary *)attributesOfItemAtPath:(NSString *)path;
+// 获取文件属性集合(错误信息error)
++ (NSDictionary *)attributesOfItemAtPath:(NSString *)path error:(NSError **)error;
+
 #pragma mark - 创建文件(夹)
 // 创建文件夹
 + (BOOL)createDirectoryAtPath:(NSString *)path;
@@ -66,6 +76,44 @@
 + (BOOL)createFileAtPath:(NSString *)path content:(NSObject *)content overwrite:(BOOL)overwrite;
 // 创建文件，文件内容，是否覆盖(错误信息error)
 + (BOOL)createFileAtPath:(NSString *)path content:(NSObject *)content overwrite:(BOOL)overwrite error:(NSError **)error;
+// 获取创建文件时间
++ (NSDate *)creationDateOfItemAtPath:(NSString *)path;
+// 获取创建文件时间(错误信息error)
++ (NSDate *)creationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
+// 获取文件修改时间
++ (NSDate *)modificationDateOfItemAtPath:(NSString *)path;
+// 获取文件修改时间(错误信息error)
++ (NSDate *)modificationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
+
+#pragma mark - 删除文件(夹)
+// 删除文件
++ (BOOL)removeItemAtPath:(NSString *)path;
+// 删除文件(错误信息error)
++ (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)error;
+// 清空Caches文件夹
++ (BOOL)clearCachesDirectory;
+// 清空tmp文件夹
++ (BOOL)clearTmpDirectory;
+
+#pragma mark - 复制文件(夹)
+// 复制文件
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath;
+// 复制文件(错误信息error)
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
+// 复制文件，是否覆盖
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
+// 复制文件，是否覆盖(错误信息error)
++ (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
+
+#pragma mark - 移动文件(夹)
+// 移动文件
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath;
+// 移动文件(错误信息error)
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
+// 移动文件，是否覆盖
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
+// 移动文件，是否覆盖(错误信息error)
++ (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
 
 #pragma mark - 根据URL获取文件名
 // 根据文件路径获取文件名称，是否需要后缀
@@ -78,12 +126,6 @@
 #pragma mark - 判断文件(夹)是否存在
 // 判断文件路径是否存在
 + (BOOL)isExistsAtPath:(NSString *)path;
-
-#pragma mark - 删除文件(夹)
-// 删除文件
-+ (BOOL)removeItemAtPath:(NSString *)path;
-// 删除文件(错误信息error)
-+ (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)error;
 
 #pragma mark - 写入文件内容
 // 写入文件内容
