@@ -36,6 +36,8 @@
 }
 
 - (void)testFileHelper {
+    // 沙盒目录
+    NSString *homePath = [HYFileManager homeDir];
     // 遍历Library目录
     NSArray *libraryArr = [HYFileManager listFilesInLibraryDirectoryByDeep:NO];
     NSLog(@"Library目录: %@", libraryArr);
