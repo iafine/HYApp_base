@@ -7,13 +7,14 @@
 //
 
 #import "AppDelegate.h"
-#import "HYHomeViewController.h"
 #import "HYAdHelper.h"
 #import "HYAdvertisingView.h"
+#import "HYTabBarViewController.h"
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) HYAdvertisingView *advertisingView;
+@property (strong, nonatomic) HYTabBarViewController *tabBarVC;
 
 @end
 
@@ -28,9 +29,7 @@
     
     // 初始化网络
     // 初始化数据库
-    HYHomeViewController *homeVC = [[HYHomeViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = self.tabBarVC;
     
     [self.window makeKeyAndVisible];
     
@@ -73,6 +72,13 @@
         _advertisingView = [[HYAdvertisingView alloc] initWithFrame:self.window.bounds];
     }
     return _advertisingView;
+}
+
+- (HYTabBarViewController *)tabBarVC {
+    if (!_tabBarVC) {
+        _tabBarVC = [[HYTabBarViewController alloc] init];
+    }
+    return _tabBarVC;
 }
 
 @end

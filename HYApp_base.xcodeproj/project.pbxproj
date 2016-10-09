@@ -27,6 +27,10 @@
 		967F4F781D94153A007042D4 /* HYAdvertisingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F771D94153A007042D4 /* HYAdvertisingPageViewController.m */; };
 		967F4F7B1D941614007042D4 /* HYAdvertisingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F4F7A1D941614007042D4 /* HYAdvertisingView.m */; };
 		96CE0D581D9658BA000D4F54 /* HYAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CE0D571D9658BA000D4F54 /* HYAdHelper.m */; };
+		96EF4FD61DAA40EE0045C84E /* HYTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EF4FD51DAA40EE0045C84E /* HYTabBarViewController.m */; };
+		96EF4FDC1DAA42F50045C84E /* HYGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EF4FDB1DAA42F50045C84E /* HYGroupViewController.m */; };
+		96EF4FE01DAA43150045C84E /* HYMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EF4FDF1DAA43150045C84E /* HYMessageViewController.m */; };
+		96EF4FE41DAA43330045C84E /* HYMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EF4FE31DAA43330045C84E /* HYMeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,14 @@
 		96CE0D561D9658BA000D4F54 /* HYAdHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYAdHelper.h; sourceTree = "<group>"; };
 		96CE0D571D9658BA000D4F54 /* HYAdHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYAdHelper.m; sourceTree = "<group>"; };
 		96CE0D591D965C11000D4F54 /* HYApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HYApp-Prefix.pch"; sourceTree = "<group>"; };
+		96EF4FD41DAA40EE0045C84E /* HYTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYTabBarViewController.h; path = Controllers/HYTabBarViewController.h; sourceTree = "<group>"; };
+		96EF4FD51DAA40EE0045C84E /* HYTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYTabBarViewController.m; path = Controllers/HYTabBarViewController.m; sourceTree = "<group>"; };
+		96EF4FDA1DAA42F50045C84E /* HYGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYGroupViewController.h; path = Controllers/Group/HYGroupViewController.h; sourceTree = "<group>"; };
+		96EF4FDB1DAA42F50045C84E /* HYGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYGroupViewController.m; path = Controllers/Group/HYGroupViewController.m; sourceTree = "<group>"; };
+		96EF4FDE1DAA43150045C84E /* HYMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYMessageViewController.h; path = Controllers/Message/HYMessageViewController.h; sourceTree = "<group>"; };
+		96EF4FDF1DAA43150045C84E /* HYMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYMessageViewController.m; path = Controllers/Message/HYMessageViewController.m; sourceTree = "<group>"; };
+		96EF4FE21DAA43330045C84E /* HYMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HYMeViewController.h; path = Controllers/Me/HYMeViewController.h; sourceTree = "<group>"; };
+		96EF4FE31DAA43330045C84E /* HYMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HYMeViewController.m; path = Controllers/Me/HYMeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +126,12 @@
 		9654BDEA1D8E80CC00B4DA2A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				96EF4FD91DAA42CF0045C84E /* Me */,
+				96EF4FD81DAA42C10045C84E /* Message */,
+				96EF4FD71DAA42640045C84E /* Group */,
 				9654BDEC1D8E811700B4DA2A /* Home */,
+				96EF4FD41DAA40EE0045C84E /* HYTabBarViewController.h */,
+				96EF4FD51DAA40EE0045C84E /* HYTabBarViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -274,6 +291,33 @@
 			path = AdHelper;
 			sourceTree = "<group>";
 		};
+		96EF4FD71DAA42640045C84E /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				96EF4FDA1DAA42F50045C84E /* HYGroupViewController.h */,
+				96EF4FDB1DAA42F50045C84E /* HYGroupViewController.m */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		96EF4FD81DAA42C10045C84E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				96EF4FDE1DAA43150045C84E /* HYMessageViewController.h */,
+				96EF4FDF1DAA43150045C84E /* HYMessageViewController.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		96EF4FD91DAA42CF0045C84E /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				96EF4FE21DAA43330045C84E /* HYMeViewController.h */,
+				96EF4FE31DAA43330045C84E /* HYMeViewController.m */,
+			);
+			name = Me;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -347,16 +391,20 @@
 				9654BE151D8E828400B4DA2A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				9654BE131D8E828400B4DA2A /* MASViewConstraint.m in Sources */,
 				9654BE0E1D8E828400B4DA2A /* MASCompositeConstraint.m in Sources */,
+				96EF4FD61DAA40EE0045C84E /* HYTabBarViewController.m in Sources */,
 				967F4F781D94153A007042D4 /* HYAdvertisingPageViewController.m in Sources */,
 				9654BE141D8E828400B4DA2A /* NSArray+MASAdditions.m in Sources */,
 				965FEBFD1D66E8390025AE73 /* main.m in Sources */,
+				96EF4FE41DAA43330045C84E /* HYMeViewController.m in Sources */,
 				9654BDEF1D8E818D00B4DA2A /* HYHomeViewController.m in Sources */,
 				9654BE111D8E828400B4DA2A /* MASLayoutConstraint.m in Sources */,
 				9661F5191D9E542600FEA51B /* HYFileManager.m in Sources */,
 				964428271D6D42190048957B /* AppDelegate.m in Sources */,
 				967F4F7B1D941614007042D4 /* HYAdvertisingView.m in Sources */,
 				9654BE171D8E828400B4DA2A /* ViewController+MASAdditions.m in Sources */,
+				96EF4FE01DAA43150045C84E /* HYMessageViewController.m in Sources */,
 				9654BE161D8E828400B4DA2A /* View+MASAdditions.m in Sources */,
+				96EF4FDC1DAA42F50045C84E /* HYGroupViewController.m in Sources */,
 				9654BE121D8E828400B4DA2A /* MASViewAttribute.m in Sources */,
 				96CE0D581D9658BA000D4F54 /* HYAdHelper.m in Sources */,
 				9654BE0F1D8E828400B4DA2A /* MASConstraint.m in Sources */,
