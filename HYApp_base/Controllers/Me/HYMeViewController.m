@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我";
+    self.title = @"设置";
 }
 
 - (void)didReceiveMemoryWarning {

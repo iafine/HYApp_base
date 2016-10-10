@@ -1,23 +1,23 @@
 //
-//  HYGroupViewController.m
+//  HYLocationViewController.m
 //  HYApp_base
 //
 //  Created by work on 16/10/9.
 //  Copyright © 2016年 Hyyy. All rights reserved.
 //
 
-#import "HYGroupViewController.h"
+#import "HYLocationViewController.h"
 
-@interface HYGroupViewController ()
+@interface HYLocationViewController ()
 
 @end
 
-@implementation HYGroupViewController
+@implementation HYLocationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"群组";
+    self.title = @"位置";
 }
 
 - (void)didReceiveMemoryWarning {

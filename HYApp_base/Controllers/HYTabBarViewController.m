@@ -8,14 +8,15 @@
 
 #import "HYTabBarViewController.h"
 #import "HYHomeViewController.h"
-#import "HYGroupViewController.h"
+#import "HYLocationViewController.h"
 #import "HYMessageViewController.h"
 #import "HYMeViewController.h"
+#import "HYColorHelper.h"
 
 @interface HYTabBarViewController ()
 
 @property (strong, nonatomic) HYHomeViewController *homeVC;
-@property (strong, nonatomic) HYGroupViewController *groupVC;
+@property (strong, nonatomic) HYLocationViewController *locationVC;
 @property (strong, nonatomic) HYMessageViewController *messageVC;
 @property (strong, nonatomic) HYMeViewController *meVC;
 
@@ -27,11 +28,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupTabBarAttributes];
+    
     // 添加导航分支
-    [self setupChildVC:self.homeVC title:@"首页" imageName:@"" selectedImageName:@""];
-    [self setupChildVC:self.groupVC title:@"群组" imageName:@"" selectedImageName:@""];
-    [self setupChildVC:self.messageVC title:@"消息" imageName:@"" selectedImageName:@""];
-    [self setupChildVC:self.meVC title:@"我" imageName:@"" selectedImageName:@""];
+    [self setupChildVC:self.homeVC title:@"首页" imageName:@"home" selectedImageName:@"home_selected"];
+    [self setupChildVC:self.locationVC title:@"位置" imageName:@"location" selectedImageName:@"location_selected"];
+    [self setupChildVC:self.messageVC title:@"提醒" imageName:@"bell" selectedImageName:@"bell_selected"];
+    [self setupChildVC:self.meVC title:@"设置" imageName:@"setting" selectedImageName:@"setting_selected"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,10 +47,16 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     nav.tabBarItem.title = title;
-    nav.tabBarItem.image = [UIImage imageNamed:imageName];
-    nav.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
+    nav.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    nav.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    nav.tabBarItem.imageInsets = UIEdgeInsetsMake(2, 2, 2, 2);
     
     [self addChildViewController:nav];
+    
+}
+
+- (void)setupTabBarAttributes {
+    [[UITabBar appearance] setTintColor:[HYColorHelper colorWithHexString:@"#92b94a"]];
 }
 
 #pragma mark - setter and getter
@@ -58,11 +67,11 @@
     return _homeVC;
 }
 
-- (HYGroupViewController *)groupVC {
-    if (!_groupVC) {
-        _groupVC = [[HYGroupViewController alloc] init];
+- (HYLocationViewController *)locationVC {
+    if (!_locationVC) {
+        _locationVC = [[HYLocationViewController alloc] init];
     }
-    return _groupVC;
+    return _locationVC;
 }
 
 - (HYMessageViewController *)messageVC {
