@@ -46,13 +46,21 @@
 - (void)setupChildVC:(UIViewController *)vc title:(NSString *)title imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName {
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
+    [self setupNavigationBarAttributes];
+    
     nav.tabBarItem.title = title;
     nav.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     nav.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     nav.tabBarItem.imageInsets = UIEdgeInsetsMake(2, 2, 2, 2);
+    [nav.navigationBar setTranslucent:NO];  // 取消导航栏默认透明效果
     
     [self addChildViewController:nav];
     
+}
+
+- (void)setupNavigationBarAttributes {
+    [[UINavigationBar appearance] setBarTintColor:[HYColorHelper colorWithHexString:@"#92b94a"]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
 }
 
 - (void)setupTabBarAttributes {
